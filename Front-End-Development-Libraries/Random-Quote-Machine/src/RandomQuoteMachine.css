@@ -1,0 +1,73 @@
+#container {
+    width: 550px;
+    display: block;
+    position: relative;
+}
+      
+#quote-box {
+    background-color: white;
+    width: 100%;
+    border-radius: 3px;
+}
+  
+#footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px 0 10px 0;
+}
+  
+#text {
+    margin: 0 auto;
+    padding: 40px 50px 20px 50px;
+    font-family: Garamond;
+    text-align: center;
+}
+  
+#author {
+    margin: 0 auto;
+    text-align: right;
+    padding: 0 40px 30px 0;
+    font-family: Geramond;
+    color: red;
+}
+  
+#button-container{
+    width: 85%;
+    display: block;
+    padding: 0 0 70px 40px;
+}
+  
+.button-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    float: left;
+    height: 40px;
+    width: 42px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+  
+.button-display {
+    color: white;
+    float: left;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+}
+  
+#new-quote {
+    height: 40px;
+    width: 85px;
+    float: right;
+}
+  
+#footer-text {
+    margin: 0 auto;
+    color: white;
+}
