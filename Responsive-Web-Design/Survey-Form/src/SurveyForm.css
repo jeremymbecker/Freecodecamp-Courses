@@ -1,0 +1,75 @@
+#survey-form-body {
+    text-align: center;
+    font-family: sans-serif;
+    color: white;
+    height: 100%;
+    width: 100%;
+}
+  
+#description {
+    font-size: 22px;
+}
+  
+.container {
+    width: 100%;
+    margin: 50px auto 0 auto;
+    max-width: 700px;
+}
+  
+#survey-form {
+    background: rgba(27,27,50,0.8);
+    min-width: 480px;
+    padding: 40px;
+}
+  
+.textbox-look {
+    width: 100%;
+}
+  
+.form-spacing {
+    margin: 0 auto 20px auto;
+}
+  
+.label-format {
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+  
+.input-format {
+    font-family: sans-serif;
+    font-size: inherit;
+    margin: 0;
+}
+  
+.select-format {
+    font-family: sans-serif;
+    font-size: inherit;
+    margin: 0;
+}
+  
+select:required:invalid {
+    color: gray;
+}
+  
+.option-format {
+    color: black;
+}
+  
+#comments {
+    font-family: sans-serif;
+    font-size: inherit;
+    margin: 0;
+    height: 120px;
+}
+  
+#submit {
+    font-family: sans-serif;
+    font-size: inherit;
+    margin: 0;
+    height: 40px;
+    background-color: mediumseagreen;
+    color: white;
+}
