@@ -1,0 +1,103 @@
+#technical-documentation-page {
+    display: flex;
+}
+  
+#navbar {
+    position: fixed;
+    width: 300px;
+    display: block;
+    left: 0;
+}
+  
+@media(max-width: 600px){
+    #navbar {
+      width: 100px;
+    }
+} 
+  
+#sidebar-title {
+    margin-left: 30px;
+}
+  
+.nav-link {
+    list-style-type: none;
+    width: 100%;
+    text-decoration: none;
+    color: black;
+    font-size: 17px;
+    padding-left: 22px;
+}
+  
+#nav-ul {
+    padding: 0;
+}
+  
+.navigation-list-format {
+    border-top: 1px solid #989898;
+    margin: 0;
+    padding: 12px 0 12px 10px;
+}
+  
+@media(max-width: 600px){
+    .nav-link {
+      font-size: 10px;
+    }
+} 
+  
+#main-doc {
+    border-left: 2.5px solid #989898;
+    padding-left: 32px;
+    margin-left: 300px;
+    position: absolute;
+}
+  
+.main-section {
+    display: block;
+}
+  
+.main-section-heading-format {
+    font-size: 30px;
+    font-family: sans-serif;
+    font-weight: 400;
+}
+  
+@media(max-width: 600px){
+    .main-section-heading-format {
+      font-size: 17.647px;
+    }
+} 
+  
+.paragraph-format {
+    font-size: 16px;
+    font-family: sans-serif;
+    margin-left: 15px;
+}
+  
+@media(max-width: 600px){
+    .paragraph-format {
+      font-size: 9.41px;
+    }
+} 
+  
+.code-format {
+      display: block;
+      background-color: #E8E8E8;
+      text-align: left;
+      line-height: 2;
+      padding: 15px;
+      margin-left: 25px;
+      border-radius: 3px;
+}
+  
+.list-format {
+    font-size: 16px;
+    font-family: sans-serif;
+    margin-top: 16px;
+    margin-left: 36px;
+}
+  
+@media(max-width: 600px){
+    .list-format {
+      font-size: 9.41px;
+    }
+}  
