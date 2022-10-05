@@ -3,9 +3,7 @@ import DrumMachine from './DrumMachine';
 
 function App() {
   return (
-    <div>
-      <DrumMachine />
-    </div>
+    <DrumMachine/>
   );
 }
 

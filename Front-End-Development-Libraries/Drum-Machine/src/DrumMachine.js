@@ -324,8 +324,6 @@ class DrumMachine extends React.Component {
     
   }
   
-  
-  
   render() {
     return (
       <div id="drum-machine">
