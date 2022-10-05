@@ -1,4 +1,6 @@
 #clock{
+    background-color: #004D4D;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
