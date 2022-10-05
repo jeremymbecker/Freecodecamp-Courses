@@ -4,7 +4,7 @@ import './SurveyForm.css';
 class SurveyForm extends React.Component{
     render() {
         return(
-            <main id="survey-form-body">
+            <main id="survey-form-page">
                 <h1 id="title">freeCodeCamp Survey Form</h1>
                 <p id="description"><em>Thank you for your time in improving our website</em></p>
                 <div className="container">

@@ -1,4 +1,7 @@
-#survey-form-body {
+#survey-form-page {
+    background: #CF9FFF;
+    display: flex;
+    flex-direction: column;
     text-align: center;
     font-family: sans-serif;
     color: white;
@@ -41,7 +44,6 @@
 .input-format {
     font-family: sans-serif;
     font-size: inherit;
-    margin: 0;
 }
   
 .select-format {
