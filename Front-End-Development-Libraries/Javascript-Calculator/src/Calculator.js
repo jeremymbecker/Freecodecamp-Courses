@@ -30,6 +30,8 @@ class Calculator extends React.Component {
       let z = this.state.zeroTyped;
       let dec = this.state.decimalTyped;
       let op = this.state.operatorTyped;
+      let opHas = this.state.operatorHasBeenTyped;
+      let negative = this.state.negativeTyped;
       switch(value) {
         case "clear":
           this.setState({
@@ -47,26 +49,59 @@ class Calculator extends React.Component {
           });
           break;
         case "+/-":
-          if(num === 0){
+          if(num === 0 && negative === false && opHas === false && equal === false){
             this.setState({
               equationDisplay: "",
-              calculatorDisplay: "-0"
+              calculatorDisplay: "-0",
+              negativeTyped: true
             });
           }
-          else{
+          else if(num === 0 && negative === false && opHas === true && equal === false){
+            this.setState({
+              equationDisplay: eq + "-",
+              calculatorDisplay: dis,
+              negativeTyped: true
+            });
+          }
+          else if(num !== 0 && negative === false && opHas === false && equal === false){
             this.setState({
               equationDisplay: "-" + eq,
-              calculatorDisplay: "-" + dis
+              calculatorDisplay: "-" + dis,
+              negativeTyped: true
+            });
+          }
+          else if(num !== 0 && negative === false && opHas === true && equal === false){
+            var negativeTemp = eq.substring(0, eq.length-dis.length);
+            var negativeTemp2 = eq.substring(eq.length-dis.length, eq.length);
+            this.setState({
+              equationDisplay: negativeTemp + "-" + negativeTemp2,
+              calculatorDisplay: "-" + dis,
+              negativeTyped: true
+            });
+          }
+          else if(equal === true){
+            this.setState({
+              equationDisplay: "-" + dis,
+              calculatorDisplay: "-" + dis,
+              negativeTyped: true,
+              equalsTyped: false
             });
           }
           break;
         case "%":
+          if(opHas === false){
+            let percent = parseFloat(dis) / 100;
+            this.setState({
+              equationDisplay: percent,
+              calculatorDisplay: percent
+            });
+          }
+          
           break;
         case "÷":
         case "×":
-        case "-":
+        case "–":
         case "+":
-          var negative = this.state.negativeTyped;
           if(equal !== true && op === false){
             this.setState({
               number: 0,
@@ -75,10 +110,13 @@ class Calculator extends React.Component {
               operatorTyped: true,
               operatorHasBeenTyped: true,
               zeroTyped: false,
-              decimalTyped: false
+              decimalTyped: false,
+              negativeTyped: false
             });
           }
-          else if(equal !== true && op === true && value !== "-" && negative === false){
+          //if after an operand is typed and another operand is typed that is +, x, or division it will replace the previous operand
+          //ex.) 3+x -> 3x. The addition symbol gets replaced by the multiplication symbol.
+          else if(equal !== true && op === true && negative === false && z === false){
             var temp = eq.substring(0, eq.length-1);
             this.setState({
               number: 0,
@@ -89,8 +127,8 @@ class Calculator extends React.Component {
               decimalTyped: false
             });
           }
-            else if(equal !== true && op === true && value !== "-" && negative === true){
-            var temp2 = eq.substring(0, eq.length-2);
+          else if(equal !== true && op === true && negative === false && z === true){
+            var temp2 = eq.substring(0, eq.length);
             this.setState({
               number: 0,
               equationDisplay: temp2 + value,
@@ -100,19 +138,17 @@ class Calculator extends React.Component {
               decimalTyped: false
             });
           }
-          else if(equal !== true && op === true && value === "-" && negative === false){
+          else if(equal !== true && op === true && negative === true){
+            console.log("I")
+            var temp3 = eq.substring(0, eq.length-2);
             this.setState({
               number: 0,
-              equationDisplay: eq + value,
+              equationDisplay: temp3 + value,
               calculatorDisplay: value,
               operatorTyped: true,
               zeroTyped: false,
-              decimalTyped: false,
-              negativeTyped: true
+              decimalTyped: false
             });
-          }
-          else if(equal !== true && op === true && value === "-" && negative === true){
-              console.log("J")
           }
           else if(equal === true){
             this.setState({
@@ -136,6 +172,7 @@ class Calculator extends React.Component {
         case "3":
         case "2":
         case "1":
+          //starting off and pressing a number
           if(num === 0 && reset === true){
             this.setState({
               number: value,
@@ -155,7 +192,7 @@ class Calculator extends React.Component {
             });
           }
           else if(num === 0 && reset === false && equal === false && z === true){
-            let sub= eq.substring(0,eq.length - 1);
+            let sub = eq.substring(0,eq.length - 1);
             this.setState({
               number: value,
               equationDisplay: sub + value,
@@ -170,9 +207,11 @@ class Calculator extends React.Component {
               calculatorDisplay: value,
               operatorTyped: false,
               equalsTyped: false
-            });
+            });  
           }
           else{
+            //typing a multi-digit number
+            //value is the value of each button you press
             this.setState({
               equationDisplay: eq + value,
               calculatorDisplay: dis + value,
@@ -261,7 +300,6 @@ class Calculator extends React.Component {
           }
           break;
         case "=":
-          var opHas = this.state.operatorHasBeenTyped;
           //hitting equals at the start
           if(reset === true){
             return;
@@ -289,7 +327,7 @@ class Calculator extends React.Component {
             }
             let opIndices = [];
             for(let i = 1; i < eq.length; i++){
-              if(eq[i] === "-" || eq[i] === "+" || eq[i] === "×" || eq[i] === "÷"){
+              if(eq[i] === "–" || eq[i] === "+" || eq[i] === "×" || eq[i] === "÷"){
                 opIndices.push(i);
               }
             }
@@ -306,8 +344,9 @@ class Calculator extends React.Component {
                       n = n + (parseFloat(numArr[k]));
                       j++;
                     }
+                    a++;
                     break;
-                  case "-":
+                  case "–":
                     if(eq.substring(opIndices[a]+1, opIndices[a]+2) === "-"){
                        n = n - (parseFloat(numArr[k]) * (-1));
                        j+=2;
@@ -316,6 +355,7 @@ class Calculator extends React.Component {
                       n = n - (parseFloat(numArr[k]));
                       j++;
                     }
+                    a++;
                     break;
                   case "×":
                    if(eq.substring(opIndices[a]+1, opIndices[a]+2) === "-"){
@@ -326,6 +366,7 @@ class Calculator extends React.Component {
                       n = n * (parseFloat(numArr[k]));
                       j++;
                     }
+                    a++;
                     break;
                   case "÷":
                     if(parseFloat(numArr[k]) !== 0){
@@ -338,18 +379,29 @@ class Calculator extends React.Component {
                         j++;
                       }
                     }
+                    else {
+                      if(eq.substring(opIndices[a]+1, opIndices[a]+2) === "-"){
+                        n = Number.NEGATIVE_INFINITY;
+                      }
+                      else {
+                        n = Number.POSITIVE_INFINITY;
+                      }
+                    }
+                    a++;
                     break;
                   default:
                     break;
                 }
               } 
             }
+            a = 0;
             this.setState({
               number: n,
               equationDisplay: eq + "=" + n,
               calculatorDisplay: n,
               equalsTyped: true,
-              operatorTyped: false
+              operatorTyped: false,
+              operatorHasBeenTyped: false
             });
           }
           break;
@@ -403,8 +455,8 @@ class Calculator extends React.Component {
               <button id="six" className="pad normal-pad number-pad" value="6" type="button" onClick={this.handleClick}>
                 6
               </button>
-              <button id="subtract" className="pad normal-pad arithmetic-pad" value="-" type="button" onClick={this.handleClick}>
-                -
+              <button id="subtract" className="pad normal-pad arithmetic-pad" value="–" type="button" onClick={this.handleClick}>
+                –
               </button>
               <button id="one" className="pad normal-pad number-pad" value="1" type="button" onClick={this.handleClick}>
                 1
